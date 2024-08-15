@@ -10,6 +10,6 @@ module BootbootBuildpack
       klass.use?
     }
 
-    pack ? pack.new(build_dir, cache_dir) : nil
+    pack&.new(build_dir, cache_dir)
   end
 end

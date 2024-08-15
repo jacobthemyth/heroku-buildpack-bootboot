@@ -6,7 +6,7 @@ module BootbootBuildpack
       "buildpack_ruby_version" => "bootboot_buildpack_ruby_version",
       "ruby_version" => "bootboot_ruby_version",
       "bundler_version" => "bootboot_bundler_version",
-      "rubygems_version" => "bootboot_rubygems_version",
+      "rubygems_version" => "bootboot_rubygems_version"
     }
 
     def read(key)

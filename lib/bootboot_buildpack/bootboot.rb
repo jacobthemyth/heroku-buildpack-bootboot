@@ -72,7 +72,7 @@ module BootbootBuildpack
       [
         "bin_next",
         bundler_binstubs_path,
-        "#{slug_vendor_base}/bin_next",
+        "#{slug_vendor_base}/bin_next"
       ]
     end
 
@@ -120,7 +120,7 @@ module BootbootBuildpack
       :remove_vendor_bundle,
       :run_assets_precompile_rake_task,
       :setup_export,
-      :vendor_libpg,
+      :vendor_libpg
     ].each do |m|
       define_method m, proc {}
     end
