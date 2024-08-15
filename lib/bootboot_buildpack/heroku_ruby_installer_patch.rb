@@ -1,4 +1,4 @@
-require "language_pack/installers/ruby_installer"
+require "language_pack/installers/heroku_ruby_installer"
 require "tempfile"
 
 module BootbootBuildpack
@@ -11,16 +11,14 @@ module BootbootBuildpack
     # `bin_next` and the original `bin` back to `/app/bin`.
     def setup_binstubs(install_dir)
       Dir.mktmpdir do |tmpdir|
-        begin
-          FileUtils.mv("bin", tmpdir)
-          super
-          FileUtils.mv("bin", "bin_next")
+        FileUtils.mv("bin", tmpdir)
+        super
+        FileUtils.mv("bin", "bin_next")
+        FileUtils.mv("#{tmpdir}/bin", "bin")
+      ensure
+        # If there was an error, make sure to restore the original `bin`
+        if Dir.exist?("#{tmpdir}/bin")
           FileUtils.mv("#{tmpdir}/bin", "bin")
-        ensure
-          # If there was an error, make sure to restore the original `bin`
-          if Dir.exist?("#{tmpdir}/bin")
-            FileUtils.mv("#{tmpdir}/bin", "bin")
-          end
         end
       end
     end

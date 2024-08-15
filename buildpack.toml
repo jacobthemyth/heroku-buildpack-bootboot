@@ -12,5 +12,5 @@ name = "Bootboot"
   dir = "."
   files = ["./.env"]
   [[publish.Vendor]]
-  url = "https://s3-external-1.amazonaws.com/heroku-buildpack-ruby/heroku-24/ruby-3.2.2.tgz"
+  url = "https://s3-external-1.amazonaws.com/heroku-buildpack-ruby/heroku-24/ruby-3.1.6.tgz"
   dir = "vendor/ruby/heroku-24"

@@ -1,31 +1,31 @@
-require_relative "../config/environment"
+ENV["HATCHET_BUILDPACK_BASE"] = "https://github.com/jacobthemyth/heroku-buildpack-bootboot"
 
-require "rspec/core"
+require "bundler/setup"
+
 require "rspec/retry"
 require "hatchet"
-
 require "language_pack/shell_helpers"
-
-ENV["RACK_ENV"] = "test"
-
-DEFAULT_STACK = "heroku-18"
+require "pathname"
 
 RSpec.configure do |config|
-  config.alias_example_to :fit, focused: true
-  config.filter_run_when_matching :focus unless ENV["CI"]
-
-  config.default_retry_count = 2 if ENV["CI"] # retry all tests that fail again
+  # Enable flags like --only-failures and --next-failure
+  config.example_status_persistence_file_path = ".rspec_status"
   config.verbose_retry = true # show retry status in spec process
-
-  config.example_status_persistence_file_path = "tmp/examples.txt"
-  config.warnings = true
+  config.default_retry_count = 2 if ENV["IS_RUNNING_ON_CI"] # retry all tests that fail again
 
   config.include LanguagePack::ShellHelpers
+
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
 end
 
-ReplRunner.register_commands(:console) do |config|
-  config.terminate_command "exit" # the command you use to end the 'rails console'
-  config.startup_timeout 60 # seconds to boot
-  config.return_char "\n" # the character that submits the command
-  config.sync_stdout "STDOUT.sync = true" # force REPL to not buffer standard out
+def run!(cmd)
+  out = `#{cmd}`
+  raise "Error running #{cmd}, output: #{out}" unless $?.success?
+  out
+end
+
+def spec_dir
+  Pathname.new(__dir__)
 end

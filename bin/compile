@@ -1,17 +1,18 @@
 #!/usr/bin/env ruby
-$stdout.sync = true
+
 require_relative "../config/environment"
+
+$stdout.sync = true
+
 require "language_pack/shell_helpers"
 
 begin
-  LanguagePack::Instrument.trace "compile", "app.compile" do
-    build_dir, cache_dir, env_dir = ARGV
-    LanguagePack::ShellHelpers.initialize_env(env_dir)
-    if pack = BootbootBuildpack.detect(build_dir, cache_dir)
-      pack.topic("Compiling #{pack.name}")
-      pack.log("compile") do
-        pack.compile
-      end
+  build_dir, cache_dir, env_dir = ARGV
+  LanguagePack::ShellHelpers.initialize_env(env_dir)
+  if pack = BootbootBuildpack.detect(build_dir, cache_dir)
+    pack.topic("Compiling #{pack.name}")
+    pack.log("compile") do
+      pack.compile
     end
   end
 rescue Exception => e
