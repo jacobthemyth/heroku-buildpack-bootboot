@@ -1,0 +1,12 @@
+source "https://rubygems.org"
+ruby "3.1.6"
+
+plugin "bootboot", "~> 0.2.2"
+Plugin.send(:load_plugin, "bootboot") if Plugin.installed?("bootboot")
+
+if ENV["DEPENDENCIES_NEXT"]
+  enable_dual_booting if Plugin.installed?("bootboot")
+  gem "rails", "~> 7.0"
+else
+  gem "rails", "~> 6.0"
+end
