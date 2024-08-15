@@ -9,7 +9,9 @@ describe "Dual booting" do
     it "fails without this buildpack" do
       buildpacks = ["heroku/ruby"]
 
-      Hatchet::Runner.new("spec/fixtures/repos/bootboot_rails_upgrade", buildpacks: buildpacks).deploy do |app|
+      app = Hatchet::Runner.new("spec/fixtures/repos/bootboot_rails_upgrade", buildpacks: buildpacks, config: {"DEPENDENCIES_NEXT" => "1"})
+
+      app.deploy do
         expect(app.output).to match("qqqqqqqqq")
       end
     end
