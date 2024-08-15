@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/heroku/heroku-buildpack-ruby.git
+  revision: d643ce7d69227946743589a80dd68cf06b41987c
+  tag: v278
+  specs:
+    language_pack (278)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -103,6 +110,7 @@ PLATFORMS
 
 DEPENDENCIES
   heroku_hatchet
+  language_pack (= 278)!
   parallel_tests
   rake
   rspec

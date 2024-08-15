@@ -6,7 +6,7 @@ module BootbootBuildpack
   def self.detect(build_dir, cache_dir)
     Dir.chdir(build_dir)
 
-    pack = [BootbootBuildpack::NoLockfileNext, BootbootBuildpack::Bootboot].detect { |klass|
+    pack = [BootbootBuildpack::NoLockfileNext].detect { |klass|
       klass.use?
     }
 
