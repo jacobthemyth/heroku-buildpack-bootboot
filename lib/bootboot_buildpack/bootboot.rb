@@ -11,7 +11,7 @@ module BootbootBuildpack
       @bundler ||= begin
         setup_bootboot_buildpack_environment
         bundler = Helpers::BootbootBundlerWrapper.new
-        topic "Using #{bundler.gemfile} and #{bundler.lockfile} for Bundler"
+        # topic "Using #{bundler.gemfile} and #{bundler.lockfile} for Bundler"
         bundler
       end.install
     end

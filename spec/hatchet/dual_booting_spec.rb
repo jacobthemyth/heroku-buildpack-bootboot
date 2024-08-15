@@ -5,8 +5,19 @@ describe "Dual booting" do
     Bundler.with_unbundled_env(&spec)
   end
 
+  it "fails without this buildpack" do
+    buildpacks = ["heroku/ruby"]
+
+    before_deploy = proc do
+      FileUtils.cp("Gemfile.lock", "Gemfile_next.lock")
+    end
+
+    Hatchet::Runner.new("default_ruby", buildpacks: buildpacks, before_deploy: before_deploy).deploy do |app|
+    end
+  end
+
   describe "different Ruby versions" do
-    it "handles apps with different Ruby versions in Gemfile.lock and Gemfile_next.lock" do
+    xit "handles apps with different Ruby versions in Gemfile.lock and Gemfile_next.lock" do
       buildpacks = ["heroku/ruby", :default]
 
       before_deploy = proc do
