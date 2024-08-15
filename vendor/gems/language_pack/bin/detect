@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [ -f "$1/Gemfile" ] || [ -f "$1/gems.rb" ]; then
-  echo "Ruby"
-  exit 0
-else
-  echo "no"
-  exit 1
-fi
